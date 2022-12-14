@@ -1,11 +1,11 @@
 <template>
-    <div class="container">result section</div>
+    <div class="container">Results</div>
 </template>
 <script>
 export default {
     name: 'ResultSection',
     props: {
-        data: String,
+        data: Object,
     },
     components: {
     },

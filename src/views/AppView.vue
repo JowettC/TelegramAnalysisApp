@@ -7,6 +7,8 @@
 // @ is an alias to /src
 import UploadSection from '@/components/UploadSection.vue'
 import ResultSection from '@/components/ResultSection.vue'
+// to remove this during staging/production
+import myJson from '@/assets/result.json'
 
 export default {
   name: 'AppView',
@@ -18,6 +20,10 @@ export default {
     return {
       file:null
     }
+  },
+  mounted(){
+    // to remove this during staging/production
+    this.file = myJson
   },
   methods:{
     processFile(file){
