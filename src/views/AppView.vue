@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  </div>
+  <UploadSection @process="processFile" v-if="!file"/>
+  <ResultSection :data="file" v-else/>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import UploadSection from '@/components/UploadSection.vue'
+import ResultSection from '@/components/ResultSection.vue'
+// to remove this during staging/production
+import myJson from '@/assets/result.json'
 
 export default {
   name: 'AppView',
   components: {
-    // HelloWorld
+    UploadSection,
+    ResultSection
+  },
+  data() {
+    return {
+      file:null
+    }
+  },
+  mounted(){
+    // to remove this during staging/production
+    this.file = myJson
+  },
+  methods:{
+    processFile(file){
+      this.file = file;
+    }
   }
 }
 </script>
