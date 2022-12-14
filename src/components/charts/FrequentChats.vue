@@ -14,8 +14,8 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Position: {{index+1}}</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                        content.</p>
+                    <h6> Name: <b>{{chat.name}}</b></h6>
+                    <p class="card-text">Chat Rating: <b>{{chat.rating}}</b></p>
                 </div>
             </div>
         </div>
@@ -74,6 +74,7 @@ export default {
                 datasets: [  {label:"Chat Rating", backgroundColor:'rgba(75, 192, 192, 0.5)', data: fcData }]
             }
         }
+        
     },
     mounted() {
         console.log(this.data)
