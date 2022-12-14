@@ -44,7 +44,7 @@ export default {
             }
         },
         submitFile() {
-            console.log(this.file)
+            this.$emit('process', this.file)
         }
     }
 }

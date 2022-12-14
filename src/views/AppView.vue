@@ -1,18 +1,25 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
-  </div>
+  <UploadSection :process="processFile"/>
 </template>
 
 <script>
 // @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import UploadSection from '@/components/UploadSection.vue'
 
 export default {
   name: 'AppView',
   components: {
-    // HelloWorld
+    UploadSection
+  },
+  data() {
+    return {
+      file:null
+    }
+  },
+  methods:{
+    processFile(file){
+      this.file = file;
+    }
   }
 }
 </script>
