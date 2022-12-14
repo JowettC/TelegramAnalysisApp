@@ -1,5 +1,5 @@
 <template>
-  <UploadSection :process="processFile" v-if="!file"/>
+  <UploadSection @process="processFile" v-if="!file"/>
   <ResultSection :data="file" v-else/>
 </template>
 
