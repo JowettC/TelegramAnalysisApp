@@ -52,10 +52,6 @@ export default {
         }
     },
     methods: {
-        changeCount() {
-            console.log(this.selected)
-        },
-
     },
     computed: {
         chartData() {
@@ -79,7 +75,7 @@ export default {
 
     },
     mounted() {
-        console.log(this.data)
+
     }
 }
 </script>
