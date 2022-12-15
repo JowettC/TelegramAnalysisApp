@@ -8,7 +8,7 @@
 import UploadSection from '@/components/UploadSection.vue'
 import ResultSection from '@/components/ResultSection.vue'
 // to remove this during staging/production
-import myJson from '@/assets/result.json'
+// import myJson from '@/assets/result.json'
 
 export default {
   name: 'AppView',
@@ -23,7 +23,7 @@ export default {
   },
   mounted(){
     // to remove this during staging/production
-    this.file = myJson
+    // this.file = myJson
   },
   methods:{
     processFile(file){
