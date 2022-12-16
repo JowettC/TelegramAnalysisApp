@@ -11,30 +11,38 @@
         <Bar id="Top Chats" class="charts" :options="chartOptions" :data="chartData" :Title="'Top Chat'" />
 
         <h3 class="Title fw-bold mt-4"> All Words</h3>
-        <div class="container">
-            <table class="table table-sm table-hover mb-0">
-                <thead class="table-info bg-opacity-25">
-                    <tr>
-                        <th scope="col" class="ps-4">Words</th>
-                        <th scope="col">Counts</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="word in data['used']" :key="word[0]">
-                        <td class="ps-4">{{ word[0] }}</td>
-                        <td>{{ word[1] }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="text-center">
 
+            <div id="wrap">
+                <div class="container">
+                    <table cellpadding="0" cellspacing="0" border="0"
+                        class="datatable table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Word</th>
+                                <th>Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="word in data['used']" :key="word[0]">
+                                <td>{{ word[0] }}</td>
+                                <td>{{ word[1] }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
 </template>
 <script>
 import { Bar } from 'vue-chartjs'
+import $ from 'jquery'
+
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+import { DataTable } from "datatables.net";
 
 export default {
     name: 'TopUsedWords',
@@ -63,6 +71,7 @@ export default {
         showWords() {
             this.show = !this.show
         },
+        DataTable:DataTable,
 
     },
     computed: {
@@ -70,7 +79,7 @@ export default {
             var fcLabels = []
             var fcData = []
             try {
-                for (var i = 0; i < this.selected; i++) {
+                for (var i = 1; i < this.selected; i++) {
                     fcLabels.push(this.data["used"][i][0])
                     fcData.push(this.data["used"][i][1])
                 }
@@ -87,18 +96,34 @@ export default {
 
     },
     mounted() {
-        console.log(this.data["used"][1])
-        document.ready(function () {
-            document.getElementById('#dtBasicExample').DataTable();
-            document.getElementsByClassName(".dataTables_length")[0].addClass('bs-select');
+        
+        
+        $('.datatable').DataTable({
+            // "pagingType ": "first_last_numbers",
+            order: [[1, 'desc']],
+            "columnDefs": [
+                { "type": "html", "targets": 0 },
+                { "type": "num"}
+            ]
         });
+        $('.datatable').each(function () {
+            var datatable = $(this);
+            // SEARCH - Add the placeholder for Search and Turn this into in-line form control
+            var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
+            search_input.attr('placeholder', 'Search');
+            search_input.addClass('form-control input-sm');
+            // LENGTH - Inline-Form control
+            var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
+            length_sel.addClass('form-control input-sm');
+        });
+
     }
 }
 </script>
 <style>
-   .table {
-        max-width: none;
-        table-layout: fixed;
-        word-wrap: break-word;
-    }
+.table {
+    max-width: none;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
 </style>
