@@ -1,5 +1,11 @@
 <template>
     <div class="container">
+        <div class="form-check filter-option">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                Only Include Actual Words
+            </label>
+        </div>
         <div class="form-group col-12 col-sm-6 mx-auto p-2">
             <select class="form-select" v-model="selected" @change="changeCount">
                 <option value="5"> Top 5</option>
@@ -14,16 +20,16 @@
         <div class="text-center">
 
             <div id="wrap">
-                <div class="container">
-                    <table cellpadding="0" cellspacing="0" border="0"
-                        class="datatable table table-striped table-bordered">
-                        <thead>
+                <div class="container mb-4">
+                    <table cellpadding="0" cellspacing="0" class="datatable table table-striped table-bordered mt-4">
+
+                        <thead class="">
                             <tr>
                                 <th>Word</th>
                                 <th>Count</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="table_body">
                             <tr v-for="word in data['used']" :key="word[0]">
                                 <td>{{ word[0] }}</td>
                                 <td>{{ word[1] }}</td>
@@ -71,7 +77,7 @@ export default {
         showWords() {
             this.show = !this.show
         },
-        DataTable:DataTable,
+        DataTable: DataTable,
 
     },
     computed: {
@@ -96,14 +102,14 @@ export default {
 
     },
     mounted() {
-        
-        
+
+
         $('.datatable').DataTable({
-            // "pagingType ": "first_last_numbers",
+            "pagingType ": "simple",
             order: [[1, 'desc']],
             "columnDefs": [
                 { "type": "html", "targets": 0 },
-                { "type": "num"}
+                { "type": "num" }
             ]
         });
         $('.datatable').each(function () {
@@ -125,5 +131,13 @@ export default {
     max-width: none;
     table-layout: fixed;
     word-wrap: break-word;
+}
+
+.table_body {
+    font-weight: 500;
+}
+.filter-option{
+    max-width:300px;
+    margin:auto;
 }
 </style>
