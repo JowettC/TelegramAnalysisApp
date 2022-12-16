@@ -1,14 +1,11 @@
 <template>
     <div class="container">
-        <div class="form-check filter-option">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        </div>
         <div class="form-group col-12 col-sm-6 mx-auto p-2">
             <select class="form-select" v-model="selected" @change="changeCount">
                 <option value="5"> Top 5</option>
                 <option value="10">Top 10</option>
                 <option value="20">Top 20</option>
-                <option value="100">Top 100</option>
+                <option value="50">Top 50</option>
             </select>
         </div>
         <Bar id="Top Chats" class="charts" :options="chartOptions" :data="chartData" :Title="'Top Chat'" />
@@ -58,12 +55,18 @@ export default {
     },
     computed: {
         chartData() {
+            // console.log(this.data)
             var fcLabels = []
             var fcData = []
             try {
-                for (var i = 1; i < this.selected; i++) {
-                    fcLabels.push(this.data[i][0])
-                    fcData.push(this.data[i][1])
+                for (var i = 0; i < this.selected; i++) {
+                    try{
+                        fcLabels.push(this.data[i][0])
+                        fcData.push(this.data[i][1])
+                    }
+                    catch{
+                        console.log(i)
+                    }
                 }
             }
             catch (err) {
@@ -78,7 +81,7 @@ export default {
 
     },
     mounted() {
-
+        // console.log(this.data)
     }
 }
 </script>

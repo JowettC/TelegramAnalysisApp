@@ -8,13 +8,13 @@
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" @click="changeDataIngest('used')"
         aria-controls="profile" aria-selected="false">
         Top Used Words
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" @click="changeDataIngest('received')"
         aria-controls="contact" aria-selected="false">
         Top Received Words
       </button>
@@ -25,7 +25,7 @@
       <FrequentChats :data="data['frequent_contacts']['list']" />
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <TopWords :data="allWords['used']" />
+      <TopWords :data="allWords[dataIngestType]" />
     </div>
   </div>
 </template>
@@ -47,9 +47,13 @@ export default {
       name: "Jowett",
       stopwords: stopwords["stopwords"],
       usedWords: [],
+      dataIngestType:"used"
     };
   },
   methods: {
+    changeDataIngest(type){
+      this.dataIngestType = type;
+    },
     cleanData(jsonWords) {
       var res = {"used":[], "received":[]}
       for (var i = 0; i< jsonWords["used"].length; i++){
@@ -59,15 +63,16 @@ export default {
       }
       for (var j = 0; j< jsonWords["received"].length; j++){
         if(typeof(jsonWords["received"][j][1]) == 'number'){
-          res.used.push(jsonWords["received"][i])
+          // console.log(jsonWords["received"][i])
+          res.received.push(jsonWords["received"][j])
         }
       }
-      
+
       return res
     }
   },
   mounted() {
-    // console.log(this.data)
+
   },
   computed: {
     allWords() {
@@ -133,7 +138,7 @@ export default {
       receivedWords.sort(function (first, second) {
         return second[1] - first[1];
       });
-
+      // console.log(receivedWords)
       return this.cleanData({ used: usedWords, received:receivedWords });
     },
   },
