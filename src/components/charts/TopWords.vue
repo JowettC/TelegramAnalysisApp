@@ -2,9 +2,6 @@
     <div class="container">
         <div class="form-check filter-option">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <!-- <label class="form-check-label" for="flexCheckDefault">
-                Only Include Actual Words
-            </label> -->
         </div>
         <div class="form-group col-12 col-sm-6 mx-auto p-2">
             <select class="form-select" v-model="selected" @change="changeCount">
@@ -30,7 +27,7 @@
                             </tr>
                         </thead>
                         <tbody class="table_body">
-                            <tr v-for="word in data['used']" :key="word[0]">
+                            <tr v-for="word in data" :key="word[0]">
                                 <td>{{ word[0] }}</td>
                                 <td>{{ word[1] }}</td>
                             </tr>
@@ -86,8 +83,8 @@ export default {
             var fcData = []
             try {
                 for (var i = 1; i < this.selected; i++) {
-                    fcLabels.push(this.data["used"][i][0])
-                    fcData.push(this.data["used"][i][1])
+                    fcLabels.push(this.data[i][0])
+                    fcData.push(this.data[i][1])
                 }
             }
             catch (err) {

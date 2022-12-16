@@ -25,9 +25,10 @@
       <FrequentChats :data="data['frequent_contacts']['list']" />
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <TopWords :data="allWords" />
+      <TopWords :data="allWords['used']" />
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
+      <TopWords :data="allWords['received']" />
   </div>
 </template>
 <script>
