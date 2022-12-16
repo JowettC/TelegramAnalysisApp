@@ -12,7 +12,7 @@
 
         
         <!-- insert data table here -->
-        <DataTableWords :data="data"/>
+        <DataTableWords :data="data" :state="state"/>
     </div>
 
 </template>
@@ -28,6 +28,7 @@ export default {
     name: 'TopWords',
     props: {
         data: Object,
+        state: String,
     },
     components: {
         Bar,
@@ -61,8 +62,8 @@ export default {
             try {
                 for (var i = 0; i < this.selected; i++) {
                     try{
-                        fcLabels.push(this.data[i][0])
-                        fcData.push(this.data[i][1])
+                        fcLabels.push(this.data[this.state][i][0])
+                        fcData.push(this.data[this.state][i][1])
                     }
                     catch{
                         console.log(i)

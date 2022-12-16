@@ -1,5 +1,5 @@
 <template>
-<h3 class="Title fw-bold mt-4"> All Words</h3>
+<h3 class="Title fw-bold mt-4"> All Words - ({{state}})</h3>
         <div class="text-center">
 
             <div id="wrap">
@@ -12,8 +12,14 @@
                                 <th>Count</th>
                             </tr>
                         </thead>
-                        <tbody class="table_body">
-                            <tr v-for="word in data" :key="word">
+                        <tbody class="table_body" v-if="used">
+                            <tr v-for="word in data[state]" :key="word">
+                                <td>{{ word[0] }}</td>
+                                <td>{{ word[1] }}</td>
+                            </tr>
+                        </tbody>
+                        <tbody class="table_body" v-else>
+                            <tr v-for="word in data[state]" :key="word">
                                 <td>{{ word[0] }}</td>
                                 <td>{{ word[1] }}</td>
                             </tr>
@@ -30,6 +36,7 @@ export default {
     name:"DataTableWords",
     props: {
         data: Object,
+        state: String,
     },
     methods:{
         DataTable: DataTable,

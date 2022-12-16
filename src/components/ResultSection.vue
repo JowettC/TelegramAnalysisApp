@@ -25,9 +25,10 @@
       <FrequentChats :data="data['frequent_contacts']['list']" />
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <TopWords :data="allWords[dataIngestType]" />
+      <TopWords :data="allWords" :state="dataIngestType" />
     </div>
   </div>
+  
 </template>
 <script>
 import FrequentChats from "@/components/charts/FrequentChats.vue";
@@ -52,6 +53,7 @@ export default {
   },
   methods: {
     changeDataIngest(type){
+      alert("It might take awhile to load when switching between used and received words")
       this.dataIngestType = type;
     },
     cleanData(jsonWords) {
