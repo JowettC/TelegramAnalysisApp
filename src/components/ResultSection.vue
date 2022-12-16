@@ -86,6 +86,7 @@ export default {
     return {
       name: "Jowett",
       stopwords: stopwords["stopwords"],
+      usedWords: [],
     };
   },
   methods: {},
@@ -108,24 +109,28 @@ export default {
               var wordsSent = message["text"].split(" ");
               wordsSent.forEach(function (word) {
                 if (stopwords["stopwords"].indexOf(word) == -1) {
-                  if (word in allWords["used"]) {
-                    allWords["used"][word] += 1;
+                  if (word.toLowerCase() in allWords["used"]) {
+                    allWords["used"][word.toLowerCase()] += 1;
                   } else {
-                    allWords["used"][word] = 1;
+                    allWords["used"][word.toLowerCase()] = 1;
                   }
                 }
               });
             } catch {
-              console.log("error");
+              //   some special cases
               continue;
             }
-
-            // console.log(wordsSent)
           }
         }
       }
-      console.log(allWords);
-      return allWords;
+      var usedWords = Object.keys(allWords["used"]).map(function (key) {
+        return [key, allWords["used"][key]];
+        // Sort the array based on the second element
+      });
+      usedWords.sort(function (first, second) {
+        return second[1] - first[1];
+      });
+      return { used: usedWords };
     },
   },
 };
