@@ -14,7 +14,7 @@
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab"
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
         aria-controls="contact" aria-selected="false">
         Top Received Words
       </button>
@@ -27,8 +27,6 @@
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <TopWords :data="allWords['used']" />
     </div>
-    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
-      <TopWords :data="allWords['received']" />
   </div>
 </template>
 <script>
@@ -53,10 +51,15 @@ export default {
   },
   methods: {
     cleanData(jsonWords) {
-      var res = {"used":[]}
+      var res = {"used":[], "received":[]}
       for (var i = 0; i< jsonWords["used"].length; i++){
         if(typeof(jsonWords["used"][i][1]) == 'number'){
           res.used.push(jsonWords["used"][i])
+        }
+      }
+      for (var j = 0; j< jsonWords["received"].length; j++){
+        if(typeof(jsonWords["received"][j][1]) == 'number'){
+          res.used.push(jsonWords["received"][i])
         }
       }
       
@@ -81,7 +84,6 @@ export default {
             try {
               var wordsSent = message["text"].split(" ");
               wordsSent.forEach(function (word) {
-                // if (stopwords["stopwords"].indexOf(word) == -1) {
 
                 if (word != "") {
                   if (word.toLowerCase() in allWords["used"]) {
@@ -98,6 +100,23 @@ export default {
               continue;
             }
           }
+          else{
+            try {
+              var wordsReceived = message["text"].split(" ");
+              wordsReceived.forEach(function (word) {
+                if (word != "") {
+                  if (word.toLowerCase() in allWords["received"]) {
+                    allWords["received"][word.toLowerCase()] += 1;
+                  } else {
+                    allWords["received"][word.toLowerCase()] = 1;
+                  }
+                }
+              });
+            } catch {
+              //   some special cases
+              continue;
+            }
+          }
         }
       }
       var usedWords = Object.keys(allWords["used"]).map(function (key) {
@@ -107,7 +126,15 @@ export default {
       usedWords.sort(function (first, second) {
         return second[1] - first[1];
       });
-      return this.cleanData({ used: usedWords });
+
+      var receivedWords = Object.keys(allWords["received"]).map(function (key) {
+        return [key, allWords["received"][key]];
+      });
+      receivedWords.sort(function (first, second) {
+        return second[1] - first[1];
+      });
+
+      return this.cleanData({ used: usedWords, received:receivedWords });
     },
   },
 };
