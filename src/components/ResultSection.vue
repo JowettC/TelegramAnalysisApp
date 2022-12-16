@@ -2,71 +2,32 @@
   <div class="container">Results</div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button
-        class="nav-link active"
-        id="home-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#home"
-        type="button"
-        role="tab"
-        aria-controls="home"
-        aria-selected="true"
-      >
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+        aria-controls="home" aria-selected="true">
         Top Chats
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button
-        class="nav-link"
-        id="profile-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#profile"
-        type="button"
-        role="tab"
-        aria-controls="profile"
-        aria-selected="false"
-      >
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+        aria-controls="profile" aria-selected="false">
         Top Used Words
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button
-        class="nav-link"
-        id="contact-tab"
-        data-bs-toggle="tab"
-        data-bs-target="#contact"
-        type="button"
-        role="tab"
-        aria-controls="contact"
-        aria-selected="false"
-      >
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab"
+        aria-controls="contact" aria-selected="false">
         Top Received Words
       </button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div
-      class="tab-pane fade show active"
-      id="home"
-      role="tabpanel"
-      aria-labelledby="home-tab"
-    >
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <FrequentChats :data="data['frequent_contacts']['list']" />
     </div>
-    <div
-      class="tab-pane fade"
-      id="profile"
-      role="tabpanel"
-      aria-labelledby="profile-tab"
-    >
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <TopUsedWords :data="allWords" />
     </div>
-    <div
-      class="tab-pane fade"
-      id="contact"
-      role="tabpanel"
-      aria-labelledby="contact-tab"
-    ></div>
+    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
   </div>
 </template>
 <script>
@@ -89,7 +50,18 @@ export default {
       usedWords: [],
     };
   },
-  methods: {},
+  methods: {
+    cleanData(jsonWords) {
+      var res = {"used":[]}
+      for (var i = 0; i< jsonWords["used"].length; i++){
+        if(typeof(jsonWords["used"][i][1]) == 'number'){
+          res.used.push(jsonWords["used"][i])
+        }
+      }
+      
+      return res
+    }
+  },
   mounted() {
     // console.log(this.data)
   },
@@ -109,17 +81,15 @@ export default {
               var wordsSent = message["text"].split(" ");
               wordsSent.forEach(function (word) {
                 // if (stopwords["stopwords"].indexOf(word) == -1) {
-                  if(word == ""){
-                    console.log("specialcase")
-                  }
-                  else{
-                    if (word.toLowerCase() in allWords["used"]) {
+
+                if (word != "") {
+                  if (word.toLowerCase() in allWords["used"]) {
                     allWords["used"][word.toLowerCase()] += 1;
                   } else {
                     allWords["used"][word.toLowerCase()] = 1;
                   }
-                  }
-                  
+                }
+
                 // }
               });
             } catch {
@@ -136,7 +106,7 @@ export default {
       usedWords.sort(function (first, second) {
         return second[1] - first[1];
       });
-      return { used: usedWords };
+      return this.cleanData({ used: usedWords });
     },
   },
 };
@@ -145,6 +115,7 @@ export default {
 .active {
   font-weight: bold;
 }
+
 .nav-link {
   color: #000;
 }
