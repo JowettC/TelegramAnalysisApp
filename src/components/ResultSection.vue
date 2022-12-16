@@ -25,14 +25,14 @@
       <FrequentChats :data="data['frequent_contacts']['list']" />
     </div>
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <TopUsedWords :data="allWords" />
+      <TopWords :data="allWords" />
     </div>
     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"></div>
   </div>
 </template>
 <script>
 import FrequentChats from "@/components/charts/FrequentChats.vue";
-import TopUsedWords from "@/components/charts/TopUsedWords.vue";
+import TopWords from "@/components/charts/TopWords.vue";
 import stopwords from "@/assets/stopwords.json";
 export default {
   name: "ResultSection",
@@ -41,7 +41,7 @@ export default {
   },
   components: {
     FrequentChats,
-    TopUsedWords,
+    TopWords,
   },
   data() {
     return {
