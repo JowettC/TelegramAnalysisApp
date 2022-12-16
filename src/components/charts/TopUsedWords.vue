@@ -11,11 +11,21 @@
         <Bar id="Top Chats" class="charts" :options="chartOptions" :data="chartData" :Title="'Top Chat'" />
 
         <h3 class="Title fw-bold mt-4"> All Words</h3>
-        <button type="button" class="btn btn-success" @click="showWords()">Show</button>
-        <div class="text-center" v-if="show">
-            <p v-for="word in data.used.slice(1,-1)" :key="word[0]">
-                {{ word[0] }} : {{ word[1] }}
-            </p>
+        <div class="container">
+            <table class="table table-sm table-hover mb-0">
+                <thead class="table-info bg-opacity-25">
+                    <tr>
+                        <th scope="col" class="ps-4">Words</th>
+                        <th scope="col">Counts</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="word in data['used']" :key="word[0]">
+                        <td class="ps-4">{{ word[0] }}</td>
+                        <td>{{ word[1] }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
         </div>
     </div>
@@ -43,7 +53,7 @@ export default {
                 plugins: {
                     title: {
                         display: true,
-                        text: "Top Chats of All Time",
+                        text: "Top Sent Words",
                     },
                 },
             }
@@ -51,7 +61,7 @@ export default {
     },
     methods: {
         showWords() {
-           this.show = !this.show
+            this.show = !this.show
         },
 
     },
@@ -71,13 +81,24 @@ export default {
 
             return {
                 labels: fcLabels,
-                datasets: [{ label: "Frequency", backgroundColor: 'rgba(75, 192, 192, 0.5)', data: fcData }]
+                datasets: [{ label: "Frequency", backgroundColor: 'rgb(255, 99, 132,0.5)', data: fcData }]
             }
         },
 
     },
     mounted() {
         console.log(this.data["used"][1])
+        document.ready(function () {
+            document.getElementById('#dtBasicExample').DataTable();
+            document.getElementsByClassName(".dataTables_length")[0].addClass('bs-select');
+        });
     }
 }
 </script>
+<style>
+   .table {
+        max-width: none;
+        table-layout: fixed;
+        word-wrap: break-word;
+    }
+</style>
