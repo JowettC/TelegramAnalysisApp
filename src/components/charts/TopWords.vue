@@ -2,9 +2,9 @@
     <div class="container">
         <div class="form-check filter-option">
             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <!-- <label class="form-check-label" for="flexCheckDefault">
                 Only Include Actual Words
-            </label>
+            </label> -->
         </div>
         <div class="form-group col-12 col-sm-6 mx-auto p-2">
             <select class="form-select" v-model="selected" @change="changeCount">
@@ -51,7 +51,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 import { DataTable } from "datatables.net";
 
 export default {
-    name: 'TopUsedWords',
+    name: 'TopWords',
     props: {
         data: Object,
     },
