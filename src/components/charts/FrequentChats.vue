@@ -4,7 +4,8 @@
             <select class="form-select" v-model="selected" @change="changeCount">
                 <option value="5"> Top 5</option>
                 <option value="10">Top 10</option>
-                <option value="15">Top 20</option>
+                <option value="20">Top 20</option>
+                <!-- <option value="100">Top 100</option> -->
             </select>
         </div>
         <Bar id="Top Chats" class="charts" :options="chartOptions" :data="chartData" :Title="'Top Chat'" />
