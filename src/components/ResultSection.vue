@@ -108,13 +108,19 @@ export default {
             try {
               var wordsSent = message["text"].split(" ");
               wordsSent.forEach(function (word) {
-                if (stopwords["stopwords"].indexOf(word) == -1) {
-                  if (word.toLowerCase() in allWords["used"]) {
+                // if (stopwords["stopwords"].indexOf(word) == -1) {
+                  if(word == ""){
+                    console.log("specialcase")
+                  }
+                  else{
+                    if (word.toLowerCase() in allWords["used"]) {
                     allWords["used"][word.toLowerCase()] += 1;
                   } else {
                     allWords["used"][word.toLowerCase()] = 1;
                   }
-                }
+                  }
+                  
+                // }
               });
             } catch {
               //   some special cases
