@@ -73,10 +73,12 @@ export default {
             catch (err) {
                 console.log(err)
             }
-
+    
+            var color = this.state == "used" ? "rgb(115, 147, 179,0.5)" : "rgb(255, 147, 179,0.5)"
+            
             return {
                 labels: fcLabels,
-                datasets: [{ label: "Frequency", backgroundColor: 'rgb(115, 147, 179,0.5)', data: fcData }]
+                datasets: [{ label: "Frequency", backgroundColor: color, data: fcData }]
             }
         },
 
