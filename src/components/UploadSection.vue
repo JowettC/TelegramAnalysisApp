@@ -19,6 +19,8 @@
             <div class="mb-3">
                 <div class="loader-container" v-if="loader">
                     <span class="loader"></span>
+                    <br/>
+                    It might take awhile depending on the size of your telegram data.
                 </div>
                 
             </div>
