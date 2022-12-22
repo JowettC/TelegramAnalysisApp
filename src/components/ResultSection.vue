@@ -98,7 +98,7 @@ export default {
         var chat = this.data["chats"]["list"][i];
         for (var j = 0; j < chat["messages"].length; j++) {
           var message = chat["messages"][j];
-          if (message["from"] == this.name) {
+          if (message["from"] == localStorage.getItem("name")) {
             try {
               var wordsSent = message["text"].split(" ");
               wordsSent.forEach(function (word) {
