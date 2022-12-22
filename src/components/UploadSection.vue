@@ -1,6 +1,11 @@
 <template>
     <div class="upload">
         <div class="container text-center">
+            <div class="form-group mb-3">
+                <label for="exampleInputEmail1">Telegram Display Name</label>
+                <input type="text" class="form-control" placeholder="Enter display name on telegram" v-model="name">
+                <small class="form-text text-muted">It is to filter messages that you sent</small>
+            </div>
             <div class="mb-3">
                 <input type="file" id="file-upload" class="form-control-file" @change="uploadFile()" ref="file" accept=".json"> <button
                     type="button" class="btn btn-success" :disabled="!file" @click="submitFile()">Process</button>
@@ -35,7 +40,8 @@ export default {
                 msg: ''
             },
             loader: false,
-            fileData:null
+            fileData:null,
+            name:null,
         }
     },
     methods: {
