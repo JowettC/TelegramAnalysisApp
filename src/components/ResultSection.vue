@@ -19,6 +19,12 @@
         Top Received Words
       </button>
     </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="sentiment-tab" data-bs-toggle="tab" data-bs-target="#sentiment" type="button" role="tab"
+        aria-controls="contact" aria-selected="false">
+        Sentiment In Chats
+      </button>
+    </li>
   </ul>
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -27,6 +33,9 @@
     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <TopWords :data="allWords" :state="dataIngestType" />
     </div>
+    <div class="tab-pane fade" id="sentiment" role="tabpanel" aria-labelledby="sentiment-tab">
+      <SentimentOfText/>
+    </div>
   </div>
   
 </template>
@@ -34,6 +43,7 @@
 import FrequentChats from "@/components/charts/FrequentChats.vue";
 import TopWords from "@/components/charts/TopWords.vue";
 import stopwords from "@/assets/stopwords.json";
+import SentimentOfText from "@/components/charts/SentimentOfText.vue";
 export default {
   name: "ResultSection",
   props: {
@@ -42,6 +52,7 @@ export default {
   components: {
     FrequentChats,
     TopWords,
+    SentimentOfText
   },
   data() {
     return {
