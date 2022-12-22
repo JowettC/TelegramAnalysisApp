@@ -23,7 +23,7 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link" id="sentiment-tab" data-bs-toggle="tab" data-bs-target="#sentiment" type="button"
         role="tab" aria-controls="contact" aria-selected="false">
-        Sentiment In Chats
+        Analysis Of Chats
       </button>
     </li>
   </ul>

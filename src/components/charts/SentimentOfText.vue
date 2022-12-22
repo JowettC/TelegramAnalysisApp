@@ -20,7 +20,7 @@
                         <br />
                         Average Characters Per Msg: <br /><b>{{ result.usedLength / result.used.length }}</b>
                         <br />
-                        Sentiment Score: <br /><b>{{ result.usedValue/ result.used.length }}</b>
+                        Sentiment/Positivity Score: <br /><b>{{ result.usedValue/ result.used.length }}</b>
                     </div>
 
                 </div>
@@ -32,7 +32,8 @@
                         <br />
                         Average Characters Per Msg: <br /> <b>{{ result.receivedLength / result.received.length }}</b>
                         <br />
-                        Sentiment Score: <br /> <b>{{ result.receivedValue/ result.received.length }}</b>
+                        Sentiment/Positivity Score: <br /> <b>{{ result.receivedValue/ result.received.length }}</b>
+                       
                     </div>
                 </div>
             </div>
