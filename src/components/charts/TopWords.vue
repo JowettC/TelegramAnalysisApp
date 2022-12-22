@@ -66,7 +66,8 @@ export default {
                         fcData.push(this.data[this.state][i][1])
                     }
                     catch{
-                        console.log(i)
+                        // console.log(i)
+                        continue;
                     }
                 }
             }

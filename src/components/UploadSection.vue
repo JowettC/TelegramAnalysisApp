@@ -8,7 +8,7 @@
             </div>
             <div class="mb-3">
                 <input type="file" id="file-upload" class="form-control-file" @change="uploadFile()" ref="file" accept=".json"> <button
-                    type="button" class="btn btn-success" :disabled="!file" @click="submitFile()">Process</button>
+                    type="button" class="btn btn-success" :disabled="!file || !name" @click="submitFile()">Process</button>
             </div>
 
             <div class="mb-3 w-50 mx-auto">
@@ -53,11 +53,13 @@ export default {
                 this.error.msg = 'Please upload a json file';
                 this.file = null;
             } else {
+                
                 this.error.state = false;
                 this.error.msg = '';
             }
         },
         submitFile() {
+            localStorage.setItem('name', this.name.toLowerCase())
             this.loader = true;
             this.readJsonFromFile()
         },

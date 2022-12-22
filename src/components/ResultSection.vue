@@ -8,20 +8,20 @@
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" @click="changeDataIngest('used')"
-        aria-controls="profile" aria-selected="false">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+        @click="changeDataIngest('used')" aria-controls="profile" aria-selected="false">
         Top Used Words
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" @click="changeDataIngest('received')"
-        aria-controls="contact" aria-selected="false">
+      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+        @click="changeDataIngest('received')" aria-controls="contact" aria-selected="false">
         Top Received Words
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="sentiment-tab" data-bs-toggle="tab" data-bs-target="#sentiment" type="button" role="tab"
-        aria-controls="contact" aria-selected="false">
+      <button class="nav-link" id="sentiment-tab" data-bs-toggle="tab" data-bs-target="#sentiment" type="button"
+        role="tab" aria-controls="contact" aria-selected="false">
         Sentiment In Chats
       </button>
     </li>
@@ -34,10 +34,10 @@
       <TopWords :data="allWords" :state="dataIngestType" />
     </div>
     <div class="tab-pane fade" id="sentiment" role="tabpanel" aria-labelledby="sentiment-tab">
-      <SentimentOfText :data="data['chats']['list']"/>
+      <SentimentOfText :data="data['chats']['list']" />
     </div>
   </div>
-  
+
 </template>
 <script>
 import FrequentChats from "@/components/charts/FrequentChats.vue";
@@ -59,23 +59,23 @@ export default {
       name: "Jowett",
       stopwords: stopwords["stopwords"],
       usedWords: [],
-      dataIngestType:"used"
+      dataIngestType: "used"
     };
   },
   methods: {
-    changeDataIngest(type){
+    changeDataIngest(type) {
       alert("It might take awhile to load when switching between used and received words")
       this.dataIngestType = type;
     },
     cleanData(jsonWords) {
-      var res = {"used":[], "received":[]}
-      for (var i = 0; i< jsonWords["used"].length; i++){
-        if(typeof(jsonWords["used"][i][1]) == 'number'){
+      var res = { "used": [], "received": [] }
+      for (var i = 0; i < jsonWords["used"].length; i++) {
+        if (typeof (jsonWords["used"][i][1]) == 'number') {
           res.used.push(jsonWords["used"][i])
         }
       }
-      for (var j = 0; j< jsonWords["received"].length; j++){
-        if(typeof(jsonWords["received"][j][1]) == 'number'){
+      for (var j = 0; j < jsonWords["received"].length; j++) {
+        if (typeof (jsonWords["received"][j][1]) == 'number') {
           // console.log(jsonWords["received"][i])
           res.received.push(jsonWords["received"][j])
         }
@@ -98,8 +98,9 @@ export default {
         var chat = this.data["chats"]["list"][i];
         for (var j = 0; j < chat["messages"].length; j++) {
           var message = chat["messages"][j];
-          if (message["from"] == localStorage.getItem("name")) {
-            try {
+          try {
+            if (message["from"].toLowerCase() == localStorage.getItem("name")) {
+
               var wordsSent = message["text"].split(" ");
               wordsSent.forEach(function (word) {
 
@@ -111,29 +112,30 @@ export default {
                   }
                 }
 
-                // }
               });
-            } catch {
-              //   some special cases
-              continue;
+
             }
-          }
-          else{
-            try {
-              var wordsReceived = message["text"].split(" ");
-              wordsReceived.forEach(function (word) {
-                if (word != "") {
-                  if (word.toLowerCase() in allWords["received"]) {
-                    allWords["received"][word.toLowerCase()] += 1;
-                  } else {
-                    allWords["received"][word.toLowerCase()] = 1;
+
+            else {
+              try {
+                var wordsReceived = message["text"].split(" ");
+                wordsReceived.forEach(function (word) {
+                  if (word != "") {
+                    if (word.toLowerCase() in allWords["received"]) {
+                      allWords["received"][word.toLowerCase()] += 1;
+                    } else {
+                      allWords["received"][word.toLowerCase()] = 1;
+                    }
                   }
-                }
-              });
-            } catch {
-              //   some special cases
-              continue;
+                });
+              } catch {
+                //   some special cases
+                continue;
+              }
             }
+          } catch {
+            //   some special cases
+            continue;
           }
         }
       }
@@ -152,7 +154,7 @@ export default {
         return second[1] - first[1];
       });
       // console.log(receivedWords)
-      return this.cleanData({ used: usedWords, received:receivedWords });
+      return this.cleanData({ used: usedWords, received: receivedWords });
     },
   },
 };
