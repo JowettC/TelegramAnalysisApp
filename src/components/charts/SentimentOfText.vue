@@ -7,15 +7,8 @@
 
 export default {
     name:"SentimentOfText",
-    async mounted(){
-        // const manager = new NlpManager({ languages: ["en"] });
-        // const result = await manager.process(
-        //     "en",
-        //     // "cero ocho cero once",
-        //     "fuck you",
-        //     {}
-        // );
-        // console.log(result)
+    mounted(){
+        
     }
 }
 </script>
