@@ -1,6 +1,6 @@
 <template>
   <UploadSection @process="processFile" v-if="!file"/>
-  <ResultSection :data="file" v-else/>
+  <ResultSection :data="file" @back="removeFile()" v-else/>
 </template>
 
 <script>
@@ -24,10 +24,14 @@ export default {
   mounted(){
     // to remove this during staging/production
     // this.file = myJson
+    // localStorage.setItem('name', "jowett")
   },
   methods:{
     processFile(file){
       this.file = file;
+    },
+    removeFile(){
+      this.file = null;
     }
   }
 }

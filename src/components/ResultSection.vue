@@ -1,4 +1,5 @@
 <template>
+  <button type="button" class="btn btn-success" @click="back()">Back</button>
   <div class="container">Results</div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
@@ -82,7 +83,10 @@ export default {
       }
 
       return res
-    }
+    },
+    back() {
+      this.$emit("back");
+    },
   },
   mounted() {
 
