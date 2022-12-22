@@ -12,13 +12,13 @@
                                 <th>Count</th>
                             </tr>
                         </thead>
-                        <tbody class="table_body" v-if="used">
+                        <tbody class="table_body">
                             <tr v-for="word in data[state]" :key="word">
                                 <td>{{ word[0] }}</td>
                                 <td>{{ word[1] }}</td>
                             </tr>
                         </tbody>
-                        <tbody class="table_body" v-else>
+                        <tbody class="table_body">
                             <tr v-for="word in data[state]" :key="word">
                                 <td>{{ word[0] }}</td>
                                 <td>{{ word[1] }}</td>
@@ -31,7 +31,7 @@
 </template>
 <script>
 import $ from 'jquery'
-import { DataTable } from "datatables.net";
+import DataTable  from "datatables.net";
 export default {
     name:"DataTableWords",
     props: {
@@ -42,26 +42,7 @@ export default {
         DataTable: DataTable,
     },
     watch: { 
-        // state: function() { // watch it
-        //     $('.datatable').DataTable({
-        //     "pagingType ": "simple",
-        //     order: [[1, 'desc']],
-        //     "columnDefs": [
-        //         { "type": "html", "targets": 0 },
-        //         { "type": "num" }
-        //     ]
-        // });
-        // $('.datatable').each(function () {
-        //     var datatable = $(this);
-        //     // SEARCH - Add the placeholder for Search and Turn this into in-line form control
-        //     var search_input = datatable.closest('.dataTables_wrapper').find('div[id$=_filter] input');
-        //     search_input.attr('placeholder', 'Search');
-        //     search_input.addClass('form-control input-sm');
-        //     // LENGTH - Inline-Form control
-        //     var length_sel = datatable.closest('.dataTables_wrapper').find('div[id$=_length] select');
-        //     length_sel.addClass('form-control input-sm');
-        // });
-        // }
+
       },
     mounted(){
         // console.log(this.data)

@@ -34,7 +34,7 @@
       <TopWords :data="allWords" :state="dataIngestType" />
     </div>
     <div class="tab-pane fade" id="sentiment" role="tabpanel" aria-labelledby="sentiment-tab">
-      <SentimentOfText/>
+      <SentimentOfText :data="data['chats']['list']"/>
     </div>
   </div>
   
