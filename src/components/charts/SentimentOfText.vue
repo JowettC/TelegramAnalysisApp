@@ -9,30 +9,30 @@
             </select>
         </div>
         <div class="card col-12 col-sm-6 mx-auto results" v-if="selected != null">
-            <div class="title text-center"> Results</div>
+            <div class="title text-center pt-3"> Results</div>
             
             <div class="row">
                 <div class="col-12 col-sm-6">
-                    Yours
-                    <div class="content">
+                    <u>Yours</u>
+                    <div class="content mb-3">
                         <br />
-                        Total Message: <br />{{ result.used.length }}
+                        Total Message: <br /><b>{{ result.used.length }}</b>
                         <br />
-                        Average Characters Per Msg: <br />{{ result.usedLength / result.used.length }}
+                        Average Characters Per Msg: <br /><b>{{ result.usedLength / result.used.length }}</b>
                         <br />
-                        Sentiment Score: <br />{{ result.usedValue/ result.used.length }}
+                        Sentiment Score: <br /><b>{{ result.usedValue/ result.used.length }}</b>
                     </div>
 
                 </div>
                 <div class="col-12 col-sm-6">
-                    {{ data[selected].name }}
-                    <div class="content">
+                    <u>{{ data[selected].name }}</u>
+                    <div class="content mb-3">
                         <br />
-                        Total Message: <br />{{ result.received.length }}
+                        Total Message: <br /><b>{{ result.received.length }}</b>
                         <br />
-                        Average Characters Per Msg: <br />{{ result.receivedLength / result.received.length }}
+                        Average Characters Per Msg: <br /> <b>{{ result.receivedLength / result.received.length }}</b>
                         <br />
-                        Sentiment Score: <br />{{ result.receivedValue/ result.received.length }}
+                        Sentiment Score: <br /> <b>{{ result.receivedValue/ result.received.length }}</b>
                     </div>
                 </div>
             </div>
